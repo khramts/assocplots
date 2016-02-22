@@ -146,19 +146,19 @@ def mann_only_interactive(data, cut1, cut2):
     selection_glyph_2 = Square(fill_color='firebrick', line_color=None)
     nonselection_glyph_2 = Square(fill_color='olive', fill_alpha=0.1, line_color=None)
 
-    p1 = figure(plot_width=900, plot_height=300, tools=tools1, x_range=[0, 100000], webgl=True)
+    p1 = figure(responsive=True, plot_width=900, plot_height=300, tools=tools1, x_range=[0, 100000], webgl=True)
     r1 = p1.circle('pos', 'pval1', source=source, line_color=None, size=10)
     r1.selection_glyph = selection_glyph
     r1.nonselection_glyph = nonselection_glyph
     p1.patch([0, np.max(data['pos']), np.max(data['pos']), 0], [0, 0, -np.log10(cut1), -np.log10(cut1)], alpha=0.2, line_color=None, fill_color='blue', line_width=2)
 
-    p2 = figure(plot_width=900, plot_height=300, tools=tools2, x_range=p1.x_range, y_range=p1.y_range, webgl=True)
+    p2 = figure(responsive=True, plot_width=900, plot_height=300, tools=tools2, x_range=p1.x_range, y_range=p1.y_range, webgl=True)
     r2 = p2.square('pos', 'pval2', source=source, line_color=None, size=10, color="olive")
     r2.selection_glyph = selection_glyph_2
     r2.nonselection_glyph = nonselection_glyph_2
     p2.patch([0, np.max(data['pos']), np.max(data['pos']), 0], [0, 0, -np.log10(cut1), -np.log10(cut1)], alpha=0.2, line_color=None, fill_color='olive', line_width=2)
 
-    pq1 = figure(plot_width=400, plot_height=400, tools=toolsq, webgl=True)
+    pq1 = figure(responsive=True, plot_width=400, plot_height=400, tools=toolsq, webgl=True)
     pq1.line([0, 5], [0, 5], line_width=3, color="black", alpha=0.5, line_dash=[4, 4])
     rq1 = pq1.circle('pval1_q', 'pval1', source=source, line_color=None, size=10)
 #     err_x = -np.log10(np.concatenate([data['pval1_q'][:100], data['pval1_q'][100::-1]]))
