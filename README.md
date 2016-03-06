@@ -6,5 +6,10 @@ Over the last decade plethora of genome-wide association studies (GWAS) data has
 ## Implementation: 
 Assocplots is implemented as a package for the Python programming language. Its basic functionality includes plotting interactive data visualization for viewing in the browser as well as static publication quality plots. The package is designed to be used both in Jupyter notebooks and in command line. Visualizing GWAS data in a web-based document (notebook), ensures data analysis reproducibility and makes it conveniently sharable with collaborators via online repository like GitHub. The assocplots package is open source and distributed via GitHub along with examples, documentation and installation instructions.
 
-## Examples
+## Installation:
+In order to install run the following command in console:
+
+pip install https://github.com/khramts/assocplots/archive/master.zip
+
+## Examples:
 [Example 1](http://nbviewer.jupyter.org/github/khramts/assocplots/blob/master/interactive_demo.ipynb)

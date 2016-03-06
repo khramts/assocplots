@@ -33,7 +33,7 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
                 for i in range(0, 100):
                     q_err[i,:] += 1e-12
             slope, intercept, r_value, p_value, std_err = linregress(q_th, q_data)
-            print labels[j], ' -- Slope: ', slope, " R-squared:", r_value**2
+            print(labels[j], ' -- Slope: ', slope, " R-squared:", r_value**2)
             plt.plot(-np.log10(q_th), -np.log10(q_data), '.', color=color[j], label=labels[j])
             if alpha>0:
                 if error_type=='experimental':
