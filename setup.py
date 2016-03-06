@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "assocplots",
-    version = "0.0.1",
+    version = "0.0.2",
     author = "Ekaterina",
     author_email = "eakhram@gmail.com",
     description = ("AssocPlots"),
