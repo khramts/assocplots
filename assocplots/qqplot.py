@@ -42,7 +42,8 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
             # print(q_err[100:, :])
             slope, intercept, r_value, p_value, std_err = linregress(q_th, q_data)
             print(labels[j], ' -- Slope: ', slope, " R-squared:", r_value**2)
-            plt.plot(-np.log10(q_th), -np.log10(q_data), '.', color=color[j], label=labels[j])
+            plt.plot(-np.log10(q_th[n_quantiles-1:]), -np.log10(q_data[n_quantiles-1:]), '-', color=color[j])
+            plt.plot(-np.log10(q_th[:n_quantiles]), -np.log10(q_data[:n_quantiles]), '.', color=color[j], label=labels[j])
             if alpha>0:
                 if error_type=='experimental':
                     plt.fill_between(-np.log10(q_th), -np.log10(q_data/q_th*q_err[:,0]), -np.log10(q_data/q_th*q_err[:,1]), color=color[j], alpha=fill_dens[j], label='%1.3f CI'%alpha)
@@ -55,4 +56,5 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
     plt.plot([0, 8], [0, 8],'--k')
     plt.xlim([0, 7])
     plt.ylim([0, 7])
+    plt.tight_layout()
     return q_data, q_th, q_err
