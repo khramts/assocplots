@@ -5,7 +5,7 @@ import matplotlib as mpl
 #mpl.use('Agg')
 import matplotlib.pyplot as plt
 
-def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = ['k', '0.5']):
+def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = ['k', '0.5'], title='Title'):
     '''
     Static Manhattan plot
     :param p1: p-values for the top panel
@@ -49,11 +49,12 @@ def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = 
         plt.subplot(2,1,2)
         plt.plot([shift[-1], shift[-1]], [0, 10], '-k', lw=0.5, color='lightgray')
         plt.xlim([0, shift[-1]])
-        print(shift)
+        # print(shift)
 
 
     shift = (shift[1:]+shift[:-1])/2.
     plt.subplot(2,1,1)
+    plt.title(title)
     plt.setp(plt.gca().get_xticklabels(), visible=False)
     plt.xticks(shift)
     plt.text(shift[12],8,label1,bbox=dict(boxstyle="round", fc="1.0"))

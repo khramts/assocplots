@@ -5,7 +5,7 @@ from scipy.stats import binom
 from scipy.stats import norm
 from scipy.stats import linregress
 
-def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', distribution = 'binomial', log10conv=True, color=['k', 'r', 'b'], fill_dens=[0.1, 0.1, 0.1], type = 'uniform'):
+def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', distribution = 'binomial', log10conv=True, color=['k', 'r', 'b'], fill_dens=[0.1, 0.1, 0.1], type = 'uniform', title='title'):
     '''
     Function for plotting Quantile Quantile (QQ) plots with confidence interval (CI)
     :param data: NumPy 1D array with data
@@ -56,5 +56,6 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
     plt.plot([0, 8], [0, 8],'--k')
     plt.xlim([0, 7])
     plt.ylim([0, 7])
+    plt.title(title)
     plt.tight_layout()
-    return q_data, q_th, q_err
+    # return q_data, q_th, q_err
