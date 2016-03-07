@@ -5,7 +5,7 @@ import matplotlib as mpl
 #mpl.use('Agg')
 import matplotlib.pyplot as plt
 
-def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = ['k', '0.5'], title='Title'):
+def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = ['k', '0.5'], title='Title', top = 0):
     '''
     Static Manhattan plot
     :param p1: p-values for the top panel
@@ -31,7 +31,6 @@ def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = 
         x = shift[-1]+pos1[filt]
         y = -np.log10(p1[filt])
         plt.plot(x[y>cut], y[y>cut], '.')
-        plt.ylim([cut, 9])
         shift_f = np.max(x)
 
         plt.subplot(2,1,2)
@@ -39,7 +38,6 @@ def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = 
         x = shift[-1]+pos2[filt]
         y = -np.log10(p2[filt])
         plt.plot(x[y>cut], y[y>cut], '.')
-        plt.ylim([cut, 9])
         shift_m = np.max(x)
         shift = np.append(shift, np.max([shift_f, shift_m]))
 
@@ -51,15 +49,19 @@ def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = 
         plt.xlim([0, shift[-1]])
         # print(shift)
 
+    if top == 0:
+        top = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
 
     shift = (shift[1:]+shift[:-1])/2.
     plt.subplot(2,1,1)
+    plt.ylim([cut, top])
     plt.title(title)
     plt.setp(plt.gca().get_xticklabels(), visible=False)
     plt.xticks(shift)
     plt.text(shift[12],8,label1,bbox=dict(boxstyle="round", fc="1.0"))
 
     plt.subplot(2,1,2)
+    plt.ylim([cut, top])
     plt.gca().invert_yaxis()
     labels = np.arange(1,23).astype(str)
     labels[-2] = ''
