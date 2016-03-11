@@ -5,7 +5,7 @@ import matplotlib as mpl
 #mpl.use('Agg')
 import matplotlib.pyplot as plt
 
-def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = ['k', '0.5'], title='Title', top = 0):
+def manhattan2(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = ['k', '0.5'], title='Title', top = 0):
     '''
     Static Manhattan plot
     :param p1: p-values for the top panel
@@ -75,6 +75,58 @@ def manhattan(p1, pos1, chr1, label1, p2, pos2, chr2, label2, cut = 2, colors = 
     plt.xlabel('chromosome')
     # plt.tight_layout(hspace=0.001)
     plt.subplots_adjust(hspace=0.001)
+
+def manhattan(p1, pos1, chr1, label1, info1=[], info1_bins=[], info_colors=[], cut = 2, colors = ['k', '0.5'], title='Title', top = 0):
+    '''
+    Static Manhattan plot
+    :param p1: p-values for the top panel
+    :param pos1: positions
+    :param chr1: chromosomes numbers
+    :param label1: label
+    :param cut: lower cut (default 2)
+    :param colors: sequence of colors (default: black/gray)
+    :return:
+    '''
+    import matplotlib as mpl
+    mpl.rcParams['axes.color_cycle'] = ['k', '0.5']
+    shift=np.array([0.0])
+    plt.clf()
+    for i in range(1,23):
+        print(i)
+        filt = (chr1==i)
+        x = shift[-1]+pos1[filt]
+        y = -np.log10(p1[filt])
+        # print(filt.sum(), x[:5])
+        if len(info1) == 0:
+            plt.plot(x[y>cut], y[y>cut], '.')
+        else:
+            for k in range(len(info1_bins)-1):
+                filt2 = (info1[filt] > info1_bins[k]) & (info1[filt] <= info1_bins[k+1])
+                # print(filt.sum())
+                plt.plot(x[filt2 & (y > cut)], y[filt2 & (y > cut)], '.', alpha=0.7, color=info_colors[k])
+        shift_f = np.max(x)
+        shift = np.append(shift, shift_f)
+        plt.plot([shift[-1], shift[-1]], [0, 10], '-k', lw=0.5, color='lightgray')
+        plt.xlim([0, shift[-1]])
+    if top == 0:
+        top = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
+    shift = (shift[1:]+shift[:-1])/2.
+    plt.ylim([cut, top])
+    plt.title(title)
+    # plt.setp(plt.gca().get_xticklabels(), visible=False)
+    plt.xticks(shift)
+    # plt.text(shift[12],8,label1,bbox=dict(boxstyle="round", fc="1.0"))
+    labels = np.arange(1,23).astype(str)
+    labels[-2] = ''
+    labels[-4] = ''
+    labels[-6] = ''
+    labels[-8] = ''
+    labels[-10] = ''
+    plt.xticks(shift, labels)
+    plt.ylabel('-log10(p-value)')
+    plt.xlabel('chromosome')
+    # plt.tight_layout(hspace=0.001)
+    # plt.subplots_adjust(hspace=0.001)
 
 
 def reduce_data(data, top_snps=1000):
