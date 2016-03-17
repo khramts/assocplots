@@ -7,6 +7,13 @@ This is in no way an exhaustive list of all the available resources. Feel free t
 [WGAViewer] (http://igm.cumc.columbia.edu/WGAViewer/), Ge et al, 2008 
 
 [LocusZoom] (http://locuszoom.sph.umich.edu/locuszoom/)* Pruim et al, 2010
+
 GWAS Central * Beck et al, 2014
 
 *comparison for these tools presented in Zeigler et al., 2015
+
+### Packages (most are written in R):
+[qqman] (https://github.com/stephenturner/qqman) Turner, 2014
+
+
+### Other code
