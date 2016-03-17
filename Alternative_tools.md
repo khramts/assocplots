@@ -4,10 +4,5 @@ This is in no way an exhaustive list of all the available resources. Feel free t
 
 ### Standalone programs and web applications: 
 
-[WGAViewer] (Ge et al, 2008) 
+[WGAViewer] (http://igm.cumc.columbia.edu/WGAViewer/), Ge et al, 2008 
 
-
-
-
-
-[WGAViewer]: http://igm.cumc.columbia.edu/WGAViewer/
