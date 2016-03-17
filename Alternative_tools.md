@@ -4,10 +4,8 @@ This is in no way an exhaustive list of all the available resources. Feel free t
 
 ### Standalone programs and web applications: 
 
-[WGAViewer] (http://igm.cumc.columbia.edu/WGAViewer/), Ge et al, 2008 
-
-[LocusZoom] (http://locuszoom.sph.umich.edu/locuszoom/)* Pruim et al, 2010
-
+[WGAViewer] (http://igm.cumc.columbia.edu/WGAViewer/), Ge et al, 2008  
+[LocusZoom] (http://locuszoom.sph.umich.edu/locuszoom/)* Pruim et al, 2010  
 GWAS Central * Beck et al, 2014
 
 *comparison for these tools presented in Zeigler et al., 2015
