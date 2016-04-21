@@ -4,6 +4,21 @@ from scipy.stats.mstats import mquantiles
 from scipy.stats import binom
 from scipy.stats import norm
 from scipy.stats import linregress
+from scipy.stats import chi2
+
+def get_lambda(p, definition = 'median'):
+    '''
+    Evaluates Lambda value
+    :param p: distribution of p-values
+    :param definition: definition of lambda
+    :return:
+    '''
+    if definition == 'median':
+        pm = np.median(p)
+        Chi = chi2.ppf(1. - pm, 1)
+        return Chi / chi2.ppf(0.5,1)
+    else:
+        raise Exception("Only 'median' definition of lambda is implemented at this moment.")
 
 def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', distribution = 'binomial', log10conv=True, color=['k', 'r', 'b'], fill_dens=[0.1, 0.1, 0.1], type = 'uniform', title='title'):
     '''
