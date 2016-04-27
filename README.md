@@ -5,11 +5,11 @@
 **[Implementation](#implementation)**  
 **[Installation](#installation)**  
 **[Examples](#examples)**  
-**[Documentation](#documentation)**
-    **[Static plots](#static-plots)**
-      **[QQ plot](#qq-plot)**
-      **[Manhattan plot](#qq-plot)**
-    **[Interactive plots](#interactive-plots)**
+**[Documentation](#documentation)**  
+    **[Static plots](#static-plots)**  
+      **[QQ plot](#qq-plot)**  
+      **[Manhattan plot](#qq-plot)**  
+    **[Interactive plots](#interactive-plots)**  
 
 
 ##Background:
