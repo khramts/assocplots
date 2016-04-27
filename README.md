@@ -6,6 +6,10 @@
 **[Installation](#installation)**  
 **[Examples](#examples)**  
 **[Documentation](#documentation)**
+    **[Static plots](#static-plots)**
+      **[QQ plot](#qq-plot)**
+      **[Manhattan plot](#qq-plot)**
+    **[Interactive plots](#interactive-plots)**
 
 
 ##Background:
@@ -23,6 +27,9 @@ pip install https://github.com/khramts/assocplots/archive/master.zip
 ## Examples:
 [Example 1](http://nbviewer.jupyter.org/github/khramts/assocplots/blob/master/interactive_demo.ipynb)
 
-## Documentation:
-
+## Documentation:  
+### Static plots:  
+#### QQ plot  
+#### Manhattan plot  
+### Interavtive plots:
 
