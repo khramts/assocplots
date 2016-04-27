@@ -1,11 +1,11 @@
 # Assocplots: a python package for static and interactive visualization of multiple-group GWAS results
 
 ## Table of Contents:
-**[Background](#Background)**  
-**[Implementation](#Implementation)**  
-**[Installation](#Installation)**  
-**[Examples](#Examples)**  
-**[Documentation](#Documentation)**
+**[Background](#background)**  
+**[Implementation](#implementation)**  
+**[Installation](#installation)**  
+**[Examples](#examples)**  
+**[Documentation](#documentation)**
 
 
 ##Background:
