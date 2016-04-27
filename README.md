@@ -6,10 +6,8 @@
 **[Installation](#installation)**  
 **[Examples](#examples)**  
 **[Documentation](#documentation)**  
-      **[Static plots](#static-plots)**  
-         **[QQ plot](#qq-plot)**  
-         **[Manhattan plot](#qq-plot)**  
-      **[Interactive plots](#interactive-plots)**  
+**[Static plots (Quantile-quantile and Manhattan plots)](#static-plots)**  
+**[Interactive plots](#interactive-plots)**  
 
 
 ##Background:
@@ -27,9 +25,18 @@ pip install https://github.com/khramts/assocplots/archive/master.zip
 ## Examples:
 [Example 1](http://nbviewer.jupyter.org/github/khramts/assocplots/blob/master/interactive_demo.ipynb)
 
-## Documentation:  
+## Documentation:
+
 ### Static plots:  
-#### QQ plot  
-#### Manhattan plot  
+After installing assocplots, everytime after launching python, you will need to import the function which you would like to use.  
+
+###### Quantile-quantile (QQ) plot import
+```
+from assocplots.qqplot import *
+```
+###### Manhattan plot import 
+```
+from assocplots.manhattan import *
+```
 ### Interavtive plots:
 
