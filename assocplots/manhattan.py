@@ -14,7 +14,8 @@ def manhattan(p1, pos1, chr1, label1,
                title='Title',
                xlabel='chromosome',
                ylabel='-log10(p-value)',
-               top = 0,
+               top1 = 0,
+               top2 = 0,
                lines = [10, 15],
                lines_colors = ['g', 'r'],
                zoom = None):
@@ -90,21 +91,25 @@ def manhattan(p1, pos1, chr1, label1,
             plt.subplot(2,1,1)
         else:
             plt.subplot(1,1,1)
-        plt.plot([shift[-1], shift[-1]], [0, 100], '-k', lw=0.5, color='lightgray')
+        plt.plot([shift[-1], shift[-1]], [0, 1000], '-k', lw=0.5, color='lightgray')
         plt.xlim([0, shift[-1]])
 
         if type != 'single':
             plt.subplot(2,1,2)
-            plt.plot([shift[-1], shift[-1]], [0, 100], '-k', lw=0.5, color='lightgray')
+            plt.plot([shift[-1], shift[-1]], [0, 1000], '-k', lw=0.5, color='lightgray')
             plt.xlim([0, shift[-1]])
         # print(shift)
 
     # Defining top boundary of a plot
-    if top == 0:
+    if top1 == 0:
         if type != 'single':
-            top = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
+            top1 = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
         else:
-            top = np.ceil(np.max(-np.log10(p1)))
+            top1 = np.ceil(np.max(-np.log10(p1)))
+
+    if top2 == 0:
+        if type != 'single':
+            top2 = top1
 
     # Setting up the position of labels:
     shift_label = shift[-1]
@@ -125,10 +130,10 @@ def manhattan(p1, pos1, chr1, label1,
     if type != 'single':
         plt.subplot(2,1,1)
         plt.xticks(shift, labels)
-        plt.ylim([cut+0.05, top])
+        plt.ylim([cut+0.05, top1])
     else:
         plt.subplot(1,1,1)
-        plt.ylim([cut, top])
+        plt.ylim([cut, top1])
     plt.title(title)
     if type != 'single':
         plt.setp(plt.gca().get_xticklabels(), visible=False)
@@ -136,23 +141,23 @@ def manhattan(p1, pos1, chr1, label1,
     else:
         plt.xticks(shift, labels)
 
-    plt.text(shift_label*0.95,top*0.95,label1,#bbox=dict(boxstyle="round", fc="1.0"),
+    plt.text(shift_label*0.95,top1*0.95,label1,#bbox=dict(boxstyle="round", fc="1.0"),
             verticalalignment='top', horizontalalignment='right')
 
     if type != 'single':
         plt.subplot(2,1,2)
-        plt.ylim([cut, top])
+        plt.ylim([cut, top2])
         if type == 'inverted':
             plt.gca().invert_yaxis()
         plt.xticks(shift, labels)
         if type == 'inverted':
-            plt.text(shift_label*0.95,top*0.95,label2,#bbox=dict(boxstyle="round", fc="1.0"),
+            plt.text(shift_label*0.95,top2*0.95,label2,#bbox=dict(boxstyle="round", fc="1.0"),
                 verticalalignment='bottom', horizontalalignment='right')
         else:
-            plt.text(shift_label*0.95,top*0.95,label2,#bbox=dict(boxstyle="round", fc="1.0"),
+            plt.text(shift_label*0.95,top2*0.95,label2,#bbox=dict(boxstyle="round", fc="1.0"),
                 verticalalignment='top', horizontalalignment='right')
         plt.ylabel(ylabel)
-        plt.gca().yaxis.set_label_coords(-0.05,1.)
+        plt.gca().yaxis.set_label_coords(-0.065,1.)
         plt.xlabel(xlabel)
         # plt.tight_layout(hspace=0.001)
         plt.subplots_adjust(hspace=0.00)
