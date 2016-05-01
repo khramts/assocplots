@@ -59,6 +59,11 @@ def manhattan(p1, pos1, chr1, label1,
     if chrs_names is None:
         chrs_names = [str(chrs_list[i])  for i in range(len(chrs_list))]
 
+    plot_positions = False
+    if len(chrs_list) == 1:
+        plot_positions = True
+
+
     for ii, i in enumerate(chrs_list):
         if type != 'single':
             ax1 = plt.subplot(2,1,1)
@@ -129,7 +134,8 @@ def manhattan(p1, pos1, chr1, label1,
 
     if type != 'single':
         plt.subplot(2,1,1)
-        plt.xticks(shift, labels)
+        if not plot_positions:
+            plt.xticks(shift, labels)
         plt.ylim([cut+0.05, top1])
     else:
         plt.subplot(1,1,1)
@@ -137,9 +143,11 @@ def manhattan(p1, pos1, chr1, label1,
     plt.title(title)
     if type != 'single':
         plt.setp(plt.gca().get_xticklabels(), visible=False)
-        plt.xticks(shift)
+        if not plot_positions:
+            plt.xticks(shift)
     else:
-        plt.xticks(shift, labels)
+        if not plot_positions:
+            plt.xticks(shift, labels)
 
     plt.text(shift_label*0.95,top1*0.95,label1,#bbox=dict(boxstyle="round", fc="1.0"),
             verticalalignment='top', horizontalalignment='right')
@@ -149,7 +157,8 @@ def manhattan(p1, pos1, chr1, label1,
         plt.ylim([cut, top2])
         if type == 'inverted':
             plt.gca().invert_yaxis()
-        plt.xticks(shift, labels)
+        if not plot_positions:
+            plt.xticks(shift, labels)
         if type == 'inverted':
             plt.text(shift_label*0.95,top2*0.95,label2,#bbox=dict(boxstyle="round", fc="1.0"),
                 verticalalignment='bottom', horizontalalignment='right')

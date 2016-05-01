@@ -11,8 +11,9 @@ def mock_data_generation(N=2, M=10000):
     for k in range(N):
         pos = np.arange(M)
         pval = np.random.rand(M) / (np.random.rand(M)<0.999)
-        x = [((u"rs%04d"%i), pos[i], pval[i]) for i in pos[np.random.permutation(M)]]
-        x = np.array(x, dtype=[('snp', np.dtype('U25')), ('pos', np.int), ('pval', np.float)])
+        chr = np.random.randint(1, 23, M)
+        x = [((u"rs%04d"%i), chr[i], pos[i], pval[i]) for i in pos[np.random.permutation(M)]]
+        x = np.array(x, dtype=[('snp', np.dtype('U25')), ('chr', np.int), ('pos', np.int), ('pval', np.float)])
         res.append(x)
     return res
 

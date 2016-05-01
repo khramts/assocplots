@@ -31,6 +31,8 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
     :param log10conv: conversion to -log10(p) for the figure
     :return: nothing
     '''
+    xmax = 0
+    ymax = 0
     if type == 'uniform':
         # we expect distribution from 0 to 1
         for j in range(len(data)):
@@ -59,6 +61,9 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
             print(labels[j], ' -- Slope: ', slope, " R-squared:", r_value**2)
             plt.plot(-np.log10(q_th[n_quantiles-1:]), -np.log10(q_data[n_quantiles-1:]), '-', color=color[j])
             plt.plot(-np.log10(q_th[:n_quantiles]), -np.log10(q_data[:n_quantiles]), '.', color=color[j], label=labels[j])
+            xmax = np.max([xmax, - np.log10(q_th[1])])
+            ymax = np.max([ymax, - np.log10(q_data[0])])
+            # print(- np.log10(q_th[:]))
             if np.sum(alpha)>0:
                 if error_type=='experimental':
                     plt.fill_between(-np.log10(q_th), -np.log10(q_data/q_th*q_err[:,0]), -np.log10(q_data/q_th*q_err[:,1]), color=color[j], alpha=fill_dens[j], label='%1.3f CI'%alpha)
@@ -68,9 +73,10 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
     plt.legend(loc=4)
     plt.xlabel('Theoretical -log10')
     plt.ylabel('Experimental -log10')
-    plt.plot([0, 8], [0, 8],'--k')
-    plt.xlim([0, 7])
-    plt.ylim([0, 7])
+    plt.plot([0, 100], [0, 100],'--k')
+    print(xmax,ymax)
+    plt.xlim([0, np.ceil(xmax)])
+    plt.ylim([0, np.ceil(ymax*1.05)])
     plt.title(title)
     plt.tight_layout()
     # return q_data, q_th, q_err
