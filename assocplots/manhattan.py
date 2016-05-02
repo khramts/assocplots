@@ -4,6 +4,13 @@ import numpy as np
 import matplotlib as mpl
 #mpl.use('Agg')
 import matplotlib.pyplot as plt
+import re
+
+def sorted_nicely( l ):
+    """ Sort the given iterable in the way that humans expect."""
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ]
+    return sorted(l, key = alphanum_key)
 
 def manhattan(p1, pos1, chr1, label1,
                p2=None, pos2=None, chr2=None, label2=None,
@@ -50,14 +57,17 @@ def manhattan(p1, pos1, chr1, label1,
     # If chrs_plot is empty, we need to generate a list of chromosomes
     if chrs_plot is None:
         chrs_list = np.unique(chr1)
-        chrs_list.sort()
+        if type(chrs_list[0]) == str:
+            chrs_list = sorted_nicely(chrs_list)
+        else:
+            chrs_list.sort()
     else:
         chrs_list = chrs_plot
 
 
     # If chrs_names is empty, we need to generate a list of names for chromosomes
     if chrs_names is None:
-        chrs_names = [str(chrs_list[i])  for i in range(len(chrs_list))]
+        chrs_names = [str(chrs_list[i]) for i in range(len(chrs_list))]
 
     plot_positions = False
     if len(chrs_list) == 1:
@@ -69,7 +79,7 @@ def manhattan(p1, pos1, chr1, label1,
             ax1 = plt.subplot(2,1,1)
         else:
             plt.subplot(1,1,1)
-        print(i)
+        # print(i)
         filt = chr1==i
         x = shift[-1]+pos1[filt]
         y = -np.log10(p1[filt])

@@ -45,6 +45,7 @@ def write_to_html(plots, type=0, filename='output.hmtl', title='Title'):
         {{ plot_div.p0 }}
       <p>Group 2</p>
         {{ plot_div.p1 }}
+      <p class="text-muted"><a href="https://github.com/khramts/assocplots">Generated with ASSOCPLOTS package</a></p>
     </div>
     <div class="col-sm-4">
       <h3>Quantile-Quantile Plot</h3>
@@ -55,11 +56,11 @@ def write_to_html(plots, type=0, filename='output.hmtl', title='Title'):
   </div>
 </div>
 
-<footer class="footer">
+<!-- <footer class="footer">
   <div class="container-fluid">
     <p class="text-muted"><a href="https://github.com/khramts/assocplots">Generated with ASSOCPLOTS package</a></p>
   </div>
-</footer>
+</footer> --!>
 
 {{ plot_script }}
 </body>
