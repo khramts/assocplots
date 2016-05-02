@@ -127,22 +127,28 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
     print(chrs)
 
     temp_pos = 0
-    xtixks_pos = np.zeros(len(chrs))
+    xtixks_pos = np.zeros(len(chrs)+1)
     print(chrs)
     for i in range(len(chrs)):
         # Can be optimized here
         temp = ts['abspos'][ts['chr'] == chrs[i]]
-        if len(temp)>0:
+        if len(temp) > 0:
             temp = np.max(temp)
         else:
             temp = 1000
         print(temp)
-        xtixks_pos[i+1] = temp_pos
+        xtixks_pos[i+1] = temp
         # temp_pos += temp
         # xtixks_pos[i+1] = temp_pos
         # ts['abspos'][ts['chr'] == chrs[i+1]] += temp_pos
 
+    print(xtixks_pos)
     xtixks_pos = np.cumsum(xtixks_pos)
+    print(xtixks_pos)
+
+    for i in range(len(chrs)):
+        ts['abspos'][ts['chr'] == chrs[i]] += xtixks_pos[i]
+
     print(xtixks_pos)
     xtixks_pos = (xtixks_pos[1:] + xtixks_pos[:-1])/2.0
     print(xtixks_pos)
