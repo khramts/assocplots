@@ -38,5 +38,7 @@ from assocplots.qqplot import *
 ```
 from assocplots.manhattan import *
 ```
+#### [Tutorial for using static Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) 
+
 ### Interavtive plots:
 
