@@ -93,6 +93,87 @@ def data_reduce(data1, data2, N=1000, err_mode='poisson'):
     return cut1, cut2, data
 
 
+
+def data_reduce_fast(data1, data2, N=1000, err_mode='poisson'):
+    '''
+    Reducing number of points in order to speed-up rendering. Only top N points in each data set will be displayed.
+    :param data1: First data set
+    :param data2: Second data set
+    :param N: Number of points to display. Total number of points will be <=2N
+    :param err_mode:
+    :return:
+    '''
+    ind1 = data1['pval'].argsort()[:N]
+    cut1 = data1['pval'][data1['pval'].argsort()[N]]
+    ind2 = data2['pval'].argsort()[:N]
+    cut2 = data2['pval'][data2['pval'].argsort()[N]]
+
+    ind = np.array(list(set(np.concatenate([ind1,ind2]))))
+    print(len(ind))
+
+    data1.sort(order='snp')
+    data2.sort(order='snp')
+
+    indx = np.searchsorted(data2['snp'], data1['snp'])
+    indx[indx>=len(data2['snp'])] = len(data2['snp'])-1
+    m1 = data2['snp'][indx] == data1['snp']
+    data1m = data1[m1]
+    indx = np.searchsorted(data1m['snp'], data2['snp'])
+    indx[indx >= len(data1m['snp'])] = len(data1m['snp']) - 1
+    m1 = data1m['snp'][indx] == data2['snp']
+    data2m = data2[m1]
+
+    data = np.ones(len(data1m), dtype=[('snp', np.dtype('U25')),
+                               ('pos', np.int),
+                               ('chr', np.dtype('U5')),
+                               ('pval1', float),
+                               ('pval2', float),
+                               ('pval1_q', float),
+                               ('pval2_q', float),
+                               ('pval1_q_top', float),
+                               ('pval2_q_top', float),
+                               ('pval1_q_bot', float),
+                               ('pval2_q_bot', float)])
+
+    data['snp'] = data1m['snp']
+    data['pos'] = data1m['pos']
+    data['chr'] = data1m['chr']
+    data['pval1'] = data1m['pval']
+    data['pval2'] = data2m['pval']
+
+    data = data[(data['pval1']<cut1) | (data['pval2']<cut2)]
+
+
+    for i in range(len(data)):
+        data['pval1_q'][i] = 1.0*np.sum(data['pval1'][i]>=data1['pval']) / len(data1)
+        data['pval2_q'][i] = 1.0*np.sum(data['pval2'][i]>=data2['pval']) / len(data2)
+        # if err_mode == 'poisson':
+        #     temp_err_1 = np.sqrt(np.sum(data['pval1'][i]>=data1['pval'])) / len(data1)
+        #     data['pval1_q_top'][i] = data['pval1'][i] + temp_err_1
+        #     data['pval1_q_bot'][i] = data['pval1'][i] - temp_err_1
+        #     if data['pval1_q_bot'][i] < 0:
+        #         data['pval1_q_bot'][i] = 1e-12
+        #     temp_err_2 = np.sqrt(np.sum(data['pval2'][i]>=data2['pval'])) / len(data2)
+        #     data['pval2_q_top'][i] = data['pval2'][i] + temp_err_2
+        #     data['pval2_q_bot'][i] = data['pval2'][i] - temp_err_2
+        #     if data['pval2_q_bot'][i] < 0:
+        #         data['pval2_q_bot'][i] = 1e-12
+        # elif err_mode == 'simple':
+        #     temp_err_1 = np.sqrt(np.sum(data['pval1_q'][i]>=data1['pval'])) / len(data1)
+        #     data['pval1_q_top'][i] = data['pval1'][i] + temp_err_1
+        #     data['pval1_q_bot'][i] = data['pval1'][i] - temp_err_1
+        #     if data['pval1_q_bot'][i] < 0:
+        #         data['pval1_q_bot'][i] = 1e-12
+        #     temp_err_2 = np.sqrt(np.sum(data['pval2'][i]>=data2['pval'])) / len(data2)
+        #     data['pval2_q_top'][i] = data['pval2'][i] + temp_err_2
+        #     data['pval2_q_bot'][i] = data['pval2'][i] - temp_err_2
+        #     if data['pval2_q_bot'][i] < 0:
+        #         data['pval2_q_bot'][i] = 1e-12
+        # else:
+
+    return cut1, cut2, data
+
+
 def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
     '''
     Generate interactive dots.
@@ -224,7 +305,7 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
                 plot_height=300,
                 tools=tools1,
                 x_range=[0, np.max(ts['abspos'])],
-                y_range=[-1, np.ceil(np.max([np.max(ts['pval1']), np.max(ts['pval2'])]))],
+                y_range=[-1, np.ceil(np.max([np.max(ts['pval1']), np.max(ts['pval2'])])+.51)],
                 webgl=True)
     r1 = p1.circle('abspos', 'pval1', source=source, line_color=None, color='color', size=10)
     r1.selection_glyph = selection_glyph
