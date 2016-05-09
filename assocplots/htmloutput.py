@@ -5,7 +5,7 @@ from bokeh.plotting import figure
 from bokeh.resources import INLINE
 from bokeh.util.browser import view
 
-def write_to_html(plots, type=0, filename='output.hmtl', title='Title'):
+def write_to_html(plots, type=0, filename='output.html', title='Title'):
     '''
     Outputs the files into an html file
     :param filename:
