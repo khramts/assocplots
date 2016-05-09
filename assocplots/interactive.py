@@ -295,10 +295,10 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
        // data_table_filt.trigger('change');
         """)
 
-    selection_glyph = Circle(fill_color='firebrick', line_color=None)
-    nonselection_glyph = Circle(fill_color='gray', fill_alpha=0.1, line_color=None)
-    selection_glyph_2 = Square(fill_color='firebrick', line_color=None)
-    nonselection_glyph_2 = Square(fill_color='gray', fill_alpha=0.1, line_color=None)
+    selection_glyph = Circle(fill_color='firebrick', line_color=None, size=6)
+    nonselection_glyph = Circle(fill_color='gray', fill_alpha=0.1, line_color=None, size=6)
+    selection_glyph_2 = Square(fill_color='firebrick', line_color=None, size=6)
+    nonselection_glyph_2 = Square(fill_color='gray', fill_alpha=0.1, line_color=None, size=6)
 
     upper_bound = np.ceil(np.max([np.max(ts['pval1']), np.max(ts['pval2'])]) + .51)
 
