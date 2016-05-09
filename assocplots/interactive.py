@@ -300,14 +300,16 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
     selection_glyph_2 = Square(fill_color='firebrick', line_color=None)
     nonselection_glyph_2 = Square(fill_color='gray', fill_alpha=0.1, line_color=None)
 
+    upper_bound = np.ceil(np.max([np.max(ts['pval1']), np.max(ts['pval2'])]) + .51)
+
     p1 = figure(responsive=True,
                 plot_width=900,
                 plot_height=300,
                 tools=tools1,
                 x_range=[0, np.max(ts['abspos'])],
-                y_range=[-1, np.ceil(np.max([np.max(ts['pval1']), np.max(ts['pval2'])])+.51)],
+                y_range=[-0.12*upper_bound, upper_bound],
                 webgl=True)
-    r1 = p1.circle('abspos', 'pval1', source=source, line_color=None, color='color', size=10)
+    r1 = p1.circle('abspos', 'pval1', source=source, line_color=None, color='color', size=6)
     r1.selection_glyph = selection_glyph
     r1.nonselection_glyph = nonselection_glyph
     p1.patch([0, np.max(ts['abspos']), np.max(ts['abspos']), 0], [0, 0, -np.log10(cut1), -np.log10(cut1)], alpha=0.5, line_color=None, fill_color='gray', line_width=2)
@@ -319,7 +321,7 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
                 x_range=p1.x_range,
                 y_range=p1.y_range,
                 webgl=True)
-    r2 = p2.square('abspos', 'pval2', source=source, line_color=None, color='color', size=10)
+    r2 = p2.square('abspos', 'pval2', source=source, line_color=None, color='color', size=6)
     r2.selection_glyph = selection_glyph_2
     r2.nonselection_glyph = nonselection_glyph_2
     p2.patch([0, np.max(ts['abspos']), np.max(ts['abspos']), 0], [0, 0, -np.log10(cut1), -np.log10(cut1)], alpha=0.5, line_color=None, fill_color='gray', line_width=2)
@@ -352,8 +354,8 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
     # print(xtixks_pos)
     p1.xaxis[0].ticker = FixedTicker(ticks=[])
     p2.xaxis[0].ticker = FixedTicker(ticks=[])
-    p1.text(xtixks_pos,xtixks_pos*0-1, [str(chrs[i]) for i in range(len(chrs))], text_align='center')
-    p2.text(xtixks_pos,xtixks_pos*0-1, [str(chrs[i]) for i in range(len(chrs))], text_align='center')
+    p1.text(xtixks_pos,xtixks_pos*0-0.12*upper_bound, [str(chrs[i]) for i in range(len(chrs))], text_align='center')
+    p2.text(xtixks_pos,xtixks_pos*0-0.12*upper_bound, [str(chrs[i]) for i in range(len(chrs))], text_align='center')
     # p1.xaxis[0].ti
 
     columns = [

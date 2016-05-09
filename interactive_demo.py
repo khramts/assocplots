@@ -33,4 +33,4 @@ show(p4)
 
 
 from assocplots.htmloutput import *
-write_to_html([p1,p2,pq1,p4], filename='output.hmtl', title='Title')
+write_to_html([p1,p2,pq1,p4], filename='output.html', title='Title')
