@@ -24,7 +24,7 @@ pip install https://github.com/khramts/assocplots/archive/master.zip
 
 ## Examples:
 
-[Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot
+[Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot   
 Example 2 [Code](https://github.com/khramts/assocplots/blob/master/interactive_demo.ipynb) for Interactive Manhattan and QQ plot.   In browser [visualization](http://khramts.github.io/output.html)
 
 ## Documentation:
@@ -40,9 +40,9 @@ from assocplots.qqplot import *
 ```
 from assocplots.manhattan import *
 ```
-#### [Tutorial for using static Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) 
+##### [Tutorial for using static Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) 
 
-### [Tutorial for using interactive Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/interactive_demo.ipynb)
+##### [Tutorial for using interactive Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/interactive_demo.ipynb)
 
 List of alterative [resources](https://github.com/khramts/assocplots/blob/master/Alternative_tools.md).
 
