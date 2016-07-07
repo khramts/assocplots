@@ -4,9 +4,9 @@
 **[Background](#background)**  
 **[Implementation](#implementation)**  
 **[Installation](#installation)**  
-**[Documentation](#documentation)**
+**[Documentation](#documentation)**  
 **[Examples](#examples-and-tutorials)**  
-**[Interactive plots](#alterative-resources)**  
+**[Alternative Resources](#alterative-resources)**  
 
 
 ##Background:
@@ -68,7 +68,7 @@ from assocplots.interactive import *
 ```
 
 ## Examples and tutorials
-The explaination how to use this package is presented in these two examples.
+An explaination of how to use this package is presented in these two examples.
 
 [Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot   
 [Example 2](https://github.com/khramts/assocplots/blob/master/Tutorial_interactive_plots.ipynb) for Interactive Manhattan and QQ plot and its inbrowser [visualization](http://khramts.github.io/output.html)
