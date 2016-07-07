@@ -3,6 +3,7 @@ import numpy as np
 from scipy.stats.mstats import mquantiles
 from scipy.stats import binom
 from scipy.stats import norm
+from scipy.stats import beta
 from scipy.stats import linregress
 from scipy.stats import chi2
 
@@ -20,6 +21,7 @@ def get_lambda(p, definition = 'median'):
     else:
         raise Exception("Only 'median' definition of lambda is implemented at this moment.")
 
+
 def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', distribution = 'binomial', log10conv=True, color=['k', 'r', 'b'], fill_dens=[0.1, 0.1, 0.1], type = 'uniform', title='title'):
     '''
     Function for plotting Quantile Quantile (QQ) plots with confidence interval (CI)
@@ -28,6 +30,7 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
     :param type: type of the plot
     :param n_quantiles: number of quntiles to plot
     :param alpha: confidence interval
+    :param distribution: beta/normal/binomial -- type of the error estimation. Most common in the literature is 'beta'.
     :param log10conv: conversion to -log10(p) for the figure
     :return: nothing
     '''
@@ -46,16 +49,19 @@ def qqplot(data, labels, n_quantiles=100, alpha=0.95, error_type='theoretical', 
             q_err = np.zeros([len(q_pos),2])
             if np.sum(alpha) > 0:
                 for i in range(0, len(q_pos)):
-                    if distribution == 'binomial':
+                    if distribution == 'beta':
+                        q_err[i, :] = beta.interval(alpha, len(data[j])*q_pos[i], len(data[j]) - len(data[j])*q_pos[i])
+                    elif distribution == 'binomial':
                         q_err[i, :] = binom.interval(alpha=alpha, n=len(data[j]), p=q_pos[i])
                     elif distribution == 'normal':
                         q_err[i, :] = norm.interval(alpha, len(data[j])*q_pos[i], np.sqrt(len(data[j])*q_pos[i]*(1.-q_pos[i])))
-                        q_err[i, q_err[i, :] < 0] = 1e-12
                     else:
                         print('Distribution is not defined!')
-                q_err /= 1.0*len(data[j])
-                for i in range(0, 100):
-                    q_err[i,:] += 1e-12
+                q_err[i, q_err[i, :] < 0] = 1e-15
+                if (distribution == 'binomial') | (distribution == 'normal'):
+                    q_err /= 1.0*len(data[j])
+                    for i in range(0, 100):
+                        q_err[i,:] += 1e-15
             # print(q_err[100:, :])
             slope, intercept, r_value, p_value, std_err = linregress(q_th, q_data)
             # print(labels[j], ' -- Slope: ', slope, " R-squared:", r_value**2)

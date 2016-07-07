@@ -80,7 +80,7 @@ def manhattan(p1, pos1, chr1, label1,
         else:
             plt.subplot(1,1,1)
         # print(i)
-        filt = chr1==i
+        filt = np.where(chr1==i)[0]
         x = shift[-1]+pos1[filt]
         y = -np.log10(p1[filt])
         plt.plot(x[y>cut], y[y>cut], '.', color=colors[ii % len(colors)])
@@ -92,7 +92,7 @@ def manhattan(p1, pos1, chr1, label1,
 
         if type != 'single':
             plt.subplot(2,1,2)#, sharex=ax1)
-            filt = chr2==i
+            filt = np.where(chr2==i)[0]
             x = shift[-1]+pos2[filt]
             y = -np.log10(p2[filt])
             plt.plot(x[y>cut], y[y>cut], '.', color=colors[ii % len(colors)])
