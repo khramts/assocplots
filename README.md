@@ -4,10 +4,9 @@
 **[Background](#background)**  
 **[Implementation](#implementation)**  
 **[Installation](#installation)**  
-**[Examples](#examples)**  
-**[Documentation](#documentation)**  
-**[Static plots (Quantile-quantile and Manhattan plots)](#static-plots)**  
-**[Interactive plots](#interactive-plots)**  
+**[Documentation](#documentation)**
+**[Examples](#examples-and-tutorials)**  
+**[Interactive plots](#alterative-resources)**  
 
 
 ##Background:
@@ -22,14 +21,37 @@ In order to install assocplots run the following command in console:
 pip install https://github.com/khramts/assocplots/archive/master.zip
 ```
 
-## Examples:
-
-[Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot   
-Example 2 [Code](https://github.com/khramts/assocplots/blob/master/interactive_demo.ipynb) for Interactive Manhattan and QQ plot.   In browser [visualization](http://khramts.github.io/output.html)
 
 ## Documentation:
 
-### Static plots:  
+### Static plots features:
+
+#### Classic Manhattan plot
+1. X-axis: chromosome and base pair (both numeric and alphabetical names, so various chromosome labeling (e.g. 1, 2, chr1, X) is acceptable) 
+2. Y-axis: Although -log10(p-value) is the most commonly used value for the y-axis, other values such as the effect size can be specified
+3. Inverted Manhattan plot for two groups for easier visualization of peak differences  
+
+#### Classic quantile-quantile plot
+1. Multiple groups plotting: Multiple groups can be visualized on the same QQ plot for easier comparison. 
+2. Genomic Inflation Factor, λgc, calculation: In GWAS population sub-structure and cryptic relatedness among subjects can lead to spurious errors, and genomic control method is commonly used correct the under-lying population stratification (Devlin et al. 1999). The static module can be used to calculate λgc.
+3. Confidence Intervals (CI) estimation: The package allows to plot CIs for either the null distribution or the experimental data. When multiple groups are plotted, CI can be displayed for each group.  
+
+#### Figure generation  
+Assocplots supports matplotlib plotting backends and thus can save figures in raster format (i.e. png and jpg) and vector format (i.e. pdf and ps).
+
+### Interactive module features
+
+#### Dynamic Manhattan and QQ plot 
+1. Info pop-up: Hovering over a point reveals information about the SNP/gene, such as the name (SNP rs number), chromosome, base pair location, and the statistic reported on the y-axis (-log10(p-value) or effect size). 
+2. Group comparison: Selecting a set of SNPs in one graph automatically highlights those same SNPs in the other graph (a different phenotype, population, condition, etc.) Additionally, a table is generated below the graphs, listing all the selected SNPs and information about those SNPs including the position, and the test statistic across groups. 
+3. Zoom-in and -out: Plotting many points on the same graph makes it difficult to discern one point from another, as it may be in a peak or in the lower portion of the Manhattan plot which often is densely packed. To overcome this issue, the plot can be zoomed-in using a mouse scroller when the mouse pointer is placed on the Manhattan plot.  
+
+#### Visualization Sharing
+Interactive plots can be saved as notebooks and self-contained html files that can be shared with colleagues via usual sharing platforms (GitHub, Dropbox, Google Drive, etc.) and opened in any modern web browsers on any operation system.
+
+#### Limitations
+In general, interactive visualization made through web browsers are limited by the number of objects they can smoothly display. To address this limitation, the package can be extended to a web application with dynamic data loading from a database/server. Dynamic data loading would allow a user to load SNP data in real time for a specific region of interest as the user zooms-in. By making this an open source package that is accessible via GitHub, we invite members of the scientific community to contribute and enhance the package’s capabilities. 
+
 After installing assocplots, everytime after launching python, you will need to import the function which you would like to use.  
 
 ###### Quantile-quantile (QQ) plot import
@@ -40,9 +62,17 @@ from assocplots.qqplot import *
 ```
 from assocplots.manhattan import *
 ```
-##### [Tutorial for using static Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) 
+###### Interactive QQ and Manhattan plot
+```
+from assocplots.interactive import *
+```
 
-##### [Tutorial for using interactive Manhattan and QQ plots](https://github.com/khramts/assocplots/blob/master/interactive_demo.ipynb)
+## Examples and tutorials
+The explaination how to use this package is presented in these two examples.
 
-List of alterative [resources](https://github.com/khramts/assocplots/blob/master/Alternative_tools.md).
+[Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot   
+[Example 2](https://github.com/khramts/assocplots/blob/master/Tutorial_interactive_plots.ipynb) for Interactive Manhattan and QQ plot and its inbrowser [visualization](http://khramts.github.io/output.html)
+
+## Alterative resources
+Link to a list of alternative [resources](https://github.com/khramts/assocplots/blob/master/Alternative_tools.md).
 
