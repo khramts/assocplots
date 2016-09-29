@@ -39,7 +39,7 @@ def write_to_html(plots, type=0, filename='output.html', title='Title'):
   </div> --!>
   <h1>{{ title }}</h1>
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-8">
       <h3>Manhattan plots</h3>
       <p>Group 1</p>
         {{ plot_div.p0 }}
@@ -47,7 +47,7 @@ def write_to_html(plots, type=0, filename='output.html', title='Title'):
         {{ plot_div.p1 }}
       <p class="text-muted"><a href="https://github.com/khramts/assocplots">Generated with ASSOCPLOTS package</a></p>
     </div>
-    <div class="col-sm-4">
+    <div class="col-4">
       <h3>Quantile-Quantile Plot</h3>
       {{ plot_div.p2 }}
       <p>Selected elements</p>

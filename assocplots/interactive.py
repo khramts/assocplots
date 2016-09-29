@@ -174,12 +174,16 @@ def data_reduce_fast(data1, data2, N=1000, err_mode='poisson'):
     return cut1, cut2, data
 
 
-def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
+def mann_only_interactive(data, cut1, cut2,
+                          chrs_plot=None,
+                          ms=6,
+                          color_sequence = ['#7fc97f', "#beaed4", '#fdc086']):
     '''
     Generate interactive dots.
     :param data:
     :param cut1:
     :param cut2:
+    :param ms: Marker size. Default 6.
     :return:
     '''
 
@@ -235,11 +239,15 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
     print(xtixks_pos)
     print(chrs)
 
+    # Old color selection
+    # for i in range(len(chrs)):
+    #     if i % 2 == 0:
+    #         ts['color'][ts['chr'] == chrs[i]] = '#FA8072'
+    #     else:
+    #         ts['color'][ts['chr'] == chrs[i]] = '#00BFFF'
+
     for i in range(len(chrs)):
-        if i % 2 == 0:
-            ts['color'][ts['chr'] == chrs[i]] = '#FA8072'
-        else:
-            ts['color'][ts['chr'] == chrs[i]] = '#00BFFF'
+        ts['color'][ts['chr'] == chrs[i]] = color_sequence[i % len(color_sequence)]
 
     # Defining hover tools
     hover1 = HoverTool(
@@ -295,10 +303,10 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
        // data_table_filt.trigger('change');
         """)
 
-    selection_glyph = Circle(fill_color='firebrick', line_color=None, size=6)
-    nonselection_glyph = Circle(fill_color='gray', fill_alpha=0.1, line_color=None, size=6)
-    selection_glyph_2 = Square(fill_color='firebrick', line_color=None, size=6)
-    nonselection_glyph_2 = Square(fill_color='gray', fill_alpha=0.1, line_color=None, size=6)
+    selection_glyph = Circle(fill_color='firebrick', line_color=None, size=ms)
+    nonselection_glyph = Circle(fill_color='gray', fill_alpha=0.1, line_color=None, size=ms)
+    selection_glyph_2 = Square(fill_color='firebrick', line_color=None, size=ms)
+    nonselection_glyph_2 = Square(fill_color='gray', fill_alpha=0.1, line_color=None, size=ms)
 
     upper_bound = np.ceil(np.max([np.max(ts['pval1']), np.max(ts['pval2'])]) + .51)
 
@@ -309,7 +317,7 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
                 x_range=[0, np.max(ts['abspos'])],
                 y_range=[-0.12*upper_bound, upper_bound],
                 webgl=True)
-    r1 = p1.circle('abspos', 'pval1', source=source, line_color=None, color='color', size=6)
+    r1 = p1.circle('abspos', 'pval1', source=source, line_color=None, color='color', size=ms)
     r1.selection_glyph = selection_glyph
     r1.nonselection_glyph = nonselection_glyph
     p1.patch([0, np.max(ts['abspos']), np.max(ts['abspos']), 0], [0, 0, -np.log10(cut1), -np.log10(cut1)], alpha=0.5, line_color=None, fill_color='gray', line_width=2)
@@ -321,7 +329,7 @@ def mann_only_interactive(data, cut1, cut2, chrs_plot=None):
                 x_range=p1.x_range,
                 y_range=p1.y_range,
                 webgl=True)
-    r2 = p2.square('abspos', 'pval2', source=source, line_color=None, color='color', size=6)
+    r2 = p2.square('abspos', 'pval2', source=source, line_color=None, color='color', size=ms)
     r2.selection_glyph = selection_glyph_2
     r2.nonselection_glyph = nonselection_glyph_2
     p2.patch([0, np.max(ts['abspos']), np.max(ts['abspos']), 0], [0, 0, -np.log10(cut1), -np.log10(cut1)], alpha=0.5, line_color=None, fill_color='gray', line_width=2)
