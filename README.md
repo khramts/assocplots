@@ -25,7 +25,7 @@ If this command fails, then it is very likely that you do not have an appropriat
 
 https://www.continuum.io/downloads
 
-It allows to easily install Python with the most popular packages and update them to the latest versions. After installing it the command 'pip' mentioned above should run without any problems.
+It allows to easily install Python with the most popular packages and update them to the latest versions. After installing it, the command 'pip' mentioned above should run without any problems.
 
 Clone the repository using GIT:
 ```
