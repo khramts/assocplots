@@ -69,7 +69,7 @@ Figures can be saved in raster format (i.e. png and jpg) and vector format (i.e.
 #### Visualization Sharing
 Interactive plots can be saved as notebooks and self-contained html files that can be shared with colleagues via usual sharing platforms (GitHub, Dropbox, Google Drive, etc.) and opened in any modern web browsers on any operation system.
 
-
+#### Functions
 After installing assocplots, everytime after launching python, you will need to import the function which you would like to use. For a complete example on how to use the functions, see the tutorial notebooks.   
 
 ###### Quantile-quantile (QQ) plot import
