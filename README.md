@@ -89,7 +89,7 @@ from assocplots.interactive import *
 An explaination of how to use this package is presented in these two examples.
 
 [Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot   
-[Example 2](https://github.com/khramts/assocplots/blob/master/Tutorial_interactive_plots.ipynb) for Interactive Manhattan and QQ plot and its inbrowser [visualization](http://khramts.github.io/output.html)
+[Example 2](https://github.com/khramts/assocplots/blob/master/Tutorial_interactive_plots.ipynb) for Interactive Manhattan and QQ plot and its in-browser [visualization](http://khramts.github.io/output.html)
 
 ## Alterative resources
 Link to a list of alternative [resources](https://github.com/khramts/assocplots/blob/master/Alternative_tools.md).
