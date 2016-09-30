@@ -336,11 +336,11 @@ def mann_only_interactive(data, cut1, cut2,
 
     pq1 = figure(responsive=True, plot_width=400, plot_height=400, tools=toolsq, webgl=True)
     pq1.line([0, 7], [0, 7], line_width=3, color="black", alpha=0.5, line_dash=[4, 4])
-    rq1 = pq1.circle('pval1_q', 'pval1', source=source, line_color=None, size=10)
+    rq1 = pq1.circle('pval1_q', 'pval1', source=source, line_color=None, size=ms)
 #     err_x = -np.log10(np.concatenate([data['pval1_q'][:100], data['pval1_q'][100::-1]]))
 #     err_y = -np.log10(np.concatenate([data['pval1_q_top'][:100], data['pval1_q_bot'][100::-1]]))
 #     er1 = pq1.patch(err_x, err_y, alpha=0.2, color='blue')
-    rq2 = pq1.square('pval2_q', 'pval2', source=source, line_color=None, size=10, color="olive")
+    rq2 = pq1.square('pval2_q', 'pval2', source=source, line_color=None, size=ms, color="red")
 #     err_x = -np.log10(np.concatenate([data['pval2_q'][:100], data['pval2_q'][100::-1]]))
 #     err_y = -np.log10(np.concatenate([data['pval2_q_top'][:100], data['pval2_q_bot'][100::-1]]))
 #     er2 = pq1.patch(err_x, err_y, alpha=0.2, color='olive')
