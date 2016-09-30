@@ -39,7 +39,7 @@ In your terminal change the directory to the one you just created. There you wil
 ```
 jupyter notebook
 ```
-You browser will automatically open a new window where you will see the listing of the current directory. Click on "Tutorial.ipynb" and you will see a precompiled notebook with plots. Now you can run cells one by one and reproduce all images.
+Your browser will automatically open a new window where you will see the listing of the current directory. Click on "Tutorial.ipynb" and you will see a precompiled notebook with plots. Now you can run cells one by one and reproduce all images.
 
 
 ## Brief Documentation:
