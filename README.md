@@ -21,7 +21,7 @@ In order to install assocplots run the following command in a console:
 pip install https://github.com/khramts/assocplots/archive/master.zip
 ```
 
-If this command fails, then it is very likely that you do not have an appropriate version of Python, or do not have administrative priveleges to the Python folder. The easiest way to fix this issue, is to install your own instance of Python. The most common way of doing it is to use Anaconda:
+If this command fails, then it is very likely that you do not have an appropriate version of Python, or do not have administrative privileges to the Python folder. The easiest way to fix this issue, is to install your own instance of Python. The most common way of doing it is to use Anaconda:
 
 https://www.continuum.io/downloads
 
