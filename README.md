@@ -15,11 +15,32 @@ Over the last decade plethora of genome-wide association studies (GWAS) data has
 ## Implementation: 
 Assocplots is implemented as a package for the Python programming language. Its basic functionality includes plotting interactive data visualization for viewing in the browser as well as static publication quality plots. The package is designed to be used both in Jupyter notebooks and in command line. Visualizing GWAS data in a web-based document (notebook), ensures data analysis reproducibility and makes it conveniently sharable with collaborators via online repository like GitHub. The assocplots package is open source and distributed via GitHub along with examples, documentation and installation instructions.
 
-## Installation:
-In order to install assocplots run the following command in console:
+## Installation and running the tutorials:
+In order to install assocplots run the following command in a console:
 ```
 pip install https://github.com/khramts/assocplots/archive/master.zip
 ```
+
+If this command fails, then it is very likely that you do not have an appropriate version of Python, or do not have administrative privileges to the Python folder. The easiest way to fix this issue, is to install your own instance of Python. The most common way of doing it is to use Anaconda:
+
+https://www.continuum.io/downloads
+
+It allows to easily install Python with the most popular packages and update them to the latest versions. After installing it, the command 'pip' mentioned above should run without any problems.
+
+Clone the repository using GIT:
+```
+git clone https://github.com/khramts/assocplots.git
+```
+Alternatively, download the latest ZIPed version via this link:
+https://github.com/khramts/assocplots/archive/master.zip
+and unzip it in some folder.
+
+In your terminal change the directory to the one you just created. There you will find tutorial files, including "Tutorial.ipynb" file. In order to run them, start notebook server with this command:
+```
+jupyter notebook
+```
+Your browser will automatically open a new window where you will see the listing of the current directory. Click on "Tutorial.ipynb" and you will see a precompiled notebook with plots. Now you can run cells one by one and reproduce all images.
+
 
 ## Brief Documentation:
 
@@ -48,8 +69,8 @@ Figures can be saved in raster format (i.e. png and jpg) and vector format (i.e.
 #### Visualization Sharing
 Interactive plots can be saved as notebooks and self-contained html files that can be shared with colleagues via usual sharing platforms (GitHub, Dropbox, Google Drive, etc.) and opened in any modern web browsers on any operation system.
 
-
-After installing assocplots, everytime after launching python, you will need to import the function which you would like to use.  
+#### Functions
+After installing assocplots, everytime after launching python, you will need to import the function which you would like to use. For a complete example on how to use the functions, see the tutorial notebooks.   
 
 ###### Quantile-quantile (QQ) plot import
 ```
@@ -68,7 +89,7 @@ from assocplots.interactive import *
 An explaination of how to use this package is presented in these two examples.
 
 [Example 1](https://github.com/khramts/assocplots/blob/master/Tutorial.ipynb) Static Manhattan and QQ plot   
-[Example 2](https://github.com/khramts/assocplots/blob/master/Tutorial_interactive_plots.ipynb) for Interactive Manhattan and QQ plot and its inbrowser [visualization](http://khramts.github.io/output.html)
+[Example 2](https://github.com/khramts/assocplots/blob/master/Tutorial_interactive_plots.ipynb) for Interactive Manhattan and QQ plot and its in-browser [visualization](http://khramts.github.io/output.html)
 
 ## Alterative resources
 Link to a list of alternative [resources](https://github.com/khramts/assocplots/blob/master/Alternative_tools.md).
