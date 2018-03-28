@@ -25,7 +25,8 @@ def manhattan(p1, pos1, chr1, label1,
                top2 = 0,
                lines = [10, 15],
                lines_colors = ['g', 'r'],
-               zoom = None):
+               zoom = None,
+               scaling = '-log10'):
     '''
     Static Manhattan plot
     :param p1: p-values for the top panel
@@ -47,6 +48,7 @@ def manhattan(p1, pos1, chr1, label1,
     :param lines: Horizontal lines to plot.
     :param lines_colors: Colors for the horizontal lines.
     :param zoom: [chromosome, position, range] Zooms into a region.
+    :param scaling: '-log10' or 'none' (default -log10)
     :return:
     '''
 
@@ -82,7 +84,12 @@ def manhattan(p1, pos1, chr1, label1,
         # print(i)
         filt = np.where(chr1==i)[0]
         x = shift[-1]+pos1[filt]
-        y = -np.log10(p1[filt])
+        if scaling=='-log10':
+            y = -np.log10(p1[filt])
+        elif scaling=='none':
+            y = p1[filt]
+        else:
+            raise ValueError('Wrong "scaling" mode. Choose between "-log10" and "none"')
         plt.plot(x[y>cut], y[y>cut], '.', color=colors[ii % len(colors)])
         shift_f = np.max(x)
 
@@ -94,7 +101,12 @@ def manhattan(p1, pos1, chr1, label1,
             plt.subplot(2,1,2)#, sharex=ax1)
             filt = np.where(chr2==i)[0]
             x = shift[-1]+pos2[filt]
-            y = -np.log10(p2[filt])
+            if scaling=='-log10':
+                y = -np.log10(p2[filt])
+            elif scaling=='none':
+                y = p2[filt]
+            else:
+                raise ValueError('Wrong "scaling" mode. Choose between "-log10" and "none"')
             plt.plot(x[y>cut], y[y>cut], '.', color=colors[ii % len(colors)])
             shift_m = np.max(x)
         else:
@@ -118,9 +130,20 @@ def manhattan(p1, pos1, chr1, label1,
     # Defining top boundary of a plot
     if top1 == 0:
         if type != 'single':
-            top1 = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
+            if scaling == '-log10':
+                top1 = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
+            elif scaling == 'none':
+                top1 = np.ceil(np.max([np.max(p1), np.max(p2)]))
+            else:
+                raise ValueError('Wrong "scaling" mode. Choose between "-log10" and "none"')
         else:
-            top1 = np.ceil(np.max(-np.log10(p1)))
+            if scaling == '-log10':
+                top1 = np.ceil(np.max(-np.log10(p1)))
+            elif scaling == 'none':
+                top1 = np.ceil(np.max(p1))
+            else:
+                raise ValueError('Wrong "scaling" mode. Choose between "-log10" and "none"')
+
 
     if top2 == 0:
         if type != 'single':
