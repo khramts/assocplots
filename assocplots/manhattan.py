@@ -14,7 +14,7 @@ def sorted_nicely( l ):
 
 def manhattan(p1, pos1, chr1, label1,
                p2=None, pos2=None, chr2=None, label2=None,
-               type='single',
+               plot_type='single',
                chrs_plot=None, chrs_names=None,
                cut = 2,
                colors = ['k', '0.5'],
@@ -59,7 +59,7 @@ def manhattan(p1, pos1, chr1, label1,
     # If chrs_plot is empty, we need to generate a list of chromosomes
     if chrs_plot is None:
         chrs_list = np.unique(chr1)
-        if type(chrs_list[0]) == str:
+        if isinstance(chrs_list[0], str):
             chrs_list = sorted_nicely(chrs_list)
         else:
             chrs_list.sort()
@@ -77,7 +77,7 @@ def manhattan(p1, pos1, chr1, label1,
 
 
     for ii, i in enumerate(chrs_list):
-        if type != 'single':
+        if plot_type != 'single':
             ax1 = plt.subplot(2,1,1)
         else:
             plt.subplot(1,1,1)
@@ -97,7 +97,7 @@ def manhattan(p1, pos1, chr1, label1,
             if zoom[0] == i:
                 zoom_shift = zoom[1] + shift[-1]
 
-        if type != 'single':
+        if plot_type != 'single':
             plt.subplot(2,1,2)#, sharex=ax1)
             filt = np.where(chr2==i)[0]
             x = shift[-1]+pos2[filt]
@@ -114,14 +114,14 @@ def manhattan(p1, pos1, chr1, label1,
 
         shift = np.append(shift, np.max([shift_f, shift_m]))
 
-        if type != 'single':
+        if plot_type != 'single':
             plt.subplot(2,1,1)
         else:
             plt.subplot(1,1,1)
         plt.plot([shift[-1], shift[-1]], [0, 1000], '-k', lw=0.5, color='lightgray')
         plt.xlim([0, shift[-1]])
 
-        if type != 'single':
+        if plot_type != 'single':
             plt.subplot(2,1,2)
             plt.plot([shift[-1], shift[-1]], [0, 1000], '-k', lw=0.5, color='lightgray')
             plt.xlim([0, shift[-1]])
@@ -129,7 +129,7 @@ def manhattan(p1, pos1, chr1, label1,
 
     # Defining top boundary of a plot
     if top1 == 0:
-        if type != 'single':
+        if plot_type != 'single':
             if scaling == '-log10':
                 top1 = np.ceil(np.max([np.max(-np.log10(p1)), np.max(-np.log10(p2))]))
             elif scaling == 'none':
@@ -146,7 +146,7 @@ def manhattan(p1, pos1, chr1, label1,
 
 
     if top2 == 0:
-        if type != 'single':
+        if plot_type != 'single':
             top2 = top1
 
     # Setting up the position of labels:
@@ -156,7 +156,7 @@ def manhattan(p1, pos1, chr1, label1,
 
     # Plotting horizontal lines
     for i, y in enumerate(lines):
-        if type != 'single':
+        if plot_type != 'single':
             plt.subplot(2,1,1)
             plt.plot([0, shift_label], [y, y], color = lines_colors[i])
             plt.subplot(2,1,2)
@@ -165,7 +165,7 @@ def manhattan(p1, pos1, chr1, label1,
             plt.subplot(1,1,1)
             plt.plot([0, shift_label], [y, y], color = lines_colors[i])
 
-    if type != 'single':
+    if plot_type != 'single':
         plt.subplot(2,1,1)
         if not plot_positions:
             plt.xticks(shift, labels)
@@ -174,7 +174,7 @@ def manhattan(p1, pos1, chr1, label1,
         plt.subplot(1,1,1)
         plt.ylim([cut, top1])
     plt.title(title)
-    if type != 'single':
+    if plot_type != 'single':
         plt.setp(plt.gca().get_xticklabels(), visible=False)
         if not plot_positions:
             plt.xticks(shift)
@@ -185,14 +185,14 @@ def manhattan(p1, pos1, chr1, label1,
     plt.text(shift_label*0.95,top1*0.95,label1,#bbox=dict(boxstyle="round", fc="1.0"),
             verticalalignment='top', horizontalalignment='right')
 
-    if type != 'single':
+    if plot_type != 'single':
         plt.subplot(2,1,2)
         plt.ylim([cut, top2])
-        if type == 'inverted':
+        if plot_type == 'inverted':
             plt.gca().invert_yaxis()
         if not plot_positions:
             plt.xticks(shift, labels)
-        if type == 'inverted':
+        if plot_type == 'inverted':
             plt.text(shift_label*0.95,top2*0.95,label2,#bbox=dict(boxstyle="round", fc="1.0"),
                 verticalalignment='bottom', horizontalalignment='right')
         else:
@@ -208,7 +208,7 @@ def manhattan(p1, pos1, chr1, label1,
         plt.xlabel(xlabel)
 
     if zoom is not None:
-        if type != 'single':
+        if plot_type != 'single':
             plt.subplot(2,1,1)
             plt.xlim([zoom_shift-zoom[2], zoom_shift+zoom[2]])
             plt.subplot(2,1,2)
@@ -279,3 +279,4 @@ def reduce_data(data, top_snps=1000):
     :param top_snps: number of snps to include
     :return: combined table
     '''
+    pass
