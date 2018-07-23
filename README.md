@@ -1,4 +1,6 @@
 # Assocplots: a python package for static and interactive visualization of multiple-group GWAS results
+
+If you use this package please cite the following publication:
 Khramtsova, Ekaterina A., and Barbara E. Stranger. 2016. “Assocplots: A Python Package for Static and Interactive Visualization of Multiple-Group GWAS Results.” Bioinformatics , October. Oxford Univ Press. [doi:10.1093/bioinformatics/btw641.](https://academic.oup.com/bioinformatics/article/33/3/432/2593901)
 
 ## Table of Contents:
